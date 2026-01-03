@@ -66,6 +66,25 @@ public class LivroDAO {
     /**
      * {@code UPDATE} (UPDATE SET)
      * */
+    public void update(Livro livro){
+
+        String sql = "UPDATE livro SET titulo = ?, autor = ?, ano = ? WHERE id_livro = ?";
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)){
+
+            stmt.setString(1, livro.getTitulo());
+            stmt.setString(2, livro.getAutor());
+            stmt.setInt(3, livro.getAno());
+            stmt.setInt(4, livro.getIdLivro());
+
+            stmt.executeUpdate();
+
+        }catch(SQLException e){
+            throw new RuntimeException("!! Erro ao atualizar livro !!", e);
+        }
+    }
+
     public void updateDisponibilidade(int idLivro, boolean disponivel){
 
         String sql = "UPDATE livro SET disponivel = ? WHERE id_livro = ?";
