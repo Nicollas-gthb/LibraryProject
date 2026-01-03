@@ -10,7 +10,7 @@ public class ConnectionFactory {
     private static final String USER = "postgres";
     private static final String PASSWORD = "nickplays3";
 
-    public static Connection getConnetion() {
+    public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
