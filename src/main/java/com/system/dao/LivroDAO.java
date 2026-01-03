@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LivroDao {
+public class LivroDAO {
 
     /**
      * {@code CREATE} (INSERT INTO)
@@ -94,6 +94,7 @@ public class LivroDao {
             PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setInt(1, idLivro);
+
             stmt.executeUpdate();
 
         }catch(SQLException e){
