@@ -63,54 +63,22 @@ public class ClienteDAO {
     /**
      * {@code UPDATE} (UPDATE SET)
      * */
-    public void updateNome(int idCliente, String nomeCliente){
+    public void update(Cliente cliente){
 
-        String sql = "UPDATE cliente SET nome = ? WHERE id_cliente = ?";
+        String sql = "UPDATE cliente SET nome = ?, cpf = ?, email = ? WHERE id_cliente = ?";
 
         try(Connection conn = ConnectionFactory.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)){
 
-            stmt.setString(1, nomeCliente);
-            stmt.setInt(2, idCliente);
+            stmt.setString(1, cliente.getNome());
+            stmt.setString(2, cliente.getCpf());
+            stmt.setString(3, cliente.getEmail());
+            stmt.setInt(4, cliente.getIdCliente());
 
             stmt.executeUpdate();
 
         }catch(SQLException e){
             throw new RuntimeException("!! Erro ao atualizar nome do cliente !!", e);
-        }
-    }
-
-    public void updateCpf(int idCliente, String cpfCliente){
-
-        String sql = "UPDATE cliente SET cpf = ? WHERE id_cliente = ?";
-
-        try(Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
-
-            stmt.setString(1, cpfCliente);
-            stmt.setInt(2, idCliente);
-
-            stmt.executeUpdate();
-
-        }catch(SQLException e){
-            throw new RuntimeException("!! Erro ao atualizar cpf do cliente !!", e);
-        }
-    }
-
-    public void updateEmail(int idCliente, String emailCliente){
-
-        String sql = "UPDATE cliente SET email = ? WHERE id_cliente = ?";
-
-        try(Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)){
-
-            stmt.setString(1, emailCliente);
-            stmt.setInt(2, idCliente);
-
-            stmt.executeUpdate();
-
-        }catch(SQLException e){
-            throw new RuntimeException("!! Erro ao atualizar email do cliente !!", e);
         }
     }
 
