@@ -63,7 +63,7 @@ public class LivroDAO {
         return livros;
     }
 
-    public Livro findByIdLivro(int idLivro){
+    public Livro findById(int idLivro){
 
         Livro livro = null;
         String sql = "SELECT * FROM livro WHERE id_livro = ?";

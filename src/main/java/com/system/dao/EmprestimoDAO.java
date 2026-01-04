@@ -51,7 +51,6 @@ public class EmprestimoDAO {
         }
     }
 
-
     public void devolver(int idEmprestimo, int idLivro, LocalDate dataDevolucao) {
 
         String sqlEmprestimo =
@@ -87,7 +86,6 @@ public class EmprestimoDAO {
             throw new RuntimeException("Erro ao realizar devolução", e);
         }
     }
-
 
     /**
      * {@code READ} (SELECT FROM)

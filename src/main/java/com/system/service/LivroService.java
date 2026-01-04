@@ -26,7 +26,7 @@ public class LivroService {
     }
 
     public Livro buscarId(int idLivro){
-        return livroDAO.findByIdLivro(idLivro);
+        return livroDAO.findById(idLivro);
     }
 
     public void remover(int idLivro){
