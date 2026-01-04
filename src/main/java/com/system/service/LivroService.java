@@ -21,12 +21,12 @@ public class LivroService {
         livroDAO.update(livro);
     }
 
-    public Livro buscarId(int idLivro){
-        return livroDAO.findByIdLivro(idLivro);
-    }
-
     public List<Livro> listar(){
         return livroDAO.read();
+    }
+
+    public Livro buscarId(int idLivro){
+        return livroDAO.findByIdLivro(idLivro);
     }
 
     public void remover(int idLivro){
