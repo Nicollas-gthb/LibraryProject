@@ -1,7 +1,6 @@
 package com.system.dao;
 
 import com.system.database.ConnectionFactory;
-import com.system.model.Cliente;
 import com.system.model.Livro;
 
 import java.sql.*;
