@@ -1,6 +1,7 @@
 package com.system.dao;
 
 import com.system.database.ConnectionFactory;
+import com.system.model.Cliente;
 import com.system.model.Emprestimo;
 import java.sql.*;
 import java.time.LocalDate;
@@ -120,6 +121,39 @@ public class EmprestimoDAO {
         }
 
         return emprestimos;
+    }
+
+    public Emprestimo findById(int idEmprestimo){
+
+        Emprestimo emprestimo = null;
+        String sql = "SELECT * FROM emprestimo WHERE id_emprestimo = ?";
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()){
+
+            stmt.setInt(1, idEmprestimo);
+
+            if(rs.next()){
+                emprestimo = new Emprestimo();
+
+                emprestimo.setIdEmprestimo(rs.getInt("id_emprestimo"));
+                emprestimo.setIdLivro(rs.getInt("id_livro"));
+                emprestimo.setIdCliente(rs.getInt("id_cliente"));
+                emprestimo.setDataEmprestimo(rs.getDate("data_emprestimo").toLocalDate());
+
+                Date dataDev = rs.getDate("data_devolucao");
+                if(dataDev != null){
+                    emprestimo.setDataDevolucao(rs.getDate("data_devolucao").toLocalDate());
+                }
+
+            }
+
+        }catch(SQLException e){
+            throw new RuntimeException("!! Erro ao carregar os emprestimos !!", e);
+        }
+
+        return emprestimo;
     }
 
     /**

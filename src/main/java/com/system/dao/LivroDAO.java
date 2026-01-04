@@ -1,6 +1,7 @@
 package com.system.dao;
 
 import com.system.database.ConnectionFactory;
+import com.system.model.Cliente;
 import com.system.model.Livro;
 
 import java.sql.*;
@@ -61,6 +62,34 @@ public class LivroDAO {
         }
 
         return livros;
+    }
+
+    public Livro findByIdLivro(int idLivro){
+
+        Livro livro = null;
+        String sql = "SELECT * FROM livro WHERE id_livro = ?";
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()){
+
+            stmt.setInt(1, idLivro);
+
+            if(rs.next()){
+                livro = new Livro();
+
+                livro.setIdLivro(rs.getInt("id_livro"));
+                livro.setTitulo(rs.getString("titulo"));
+                livro.setAutor(rs.getString("autor"));
+                livro.setAno(rs.getInt("ano"));
+                livro.setDisponivel(rs.getBoolean("disponivel"));
+            }
+
+        }catch(SQLException e){
+            throw new RuntimeException("!! Erro ao carregar os livros !!", e);
+        }
+
+        return livro;
     }
 
     /**

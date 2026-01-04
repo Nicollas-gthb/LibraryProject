@@ -60,6 +60,33 @@ public class ClienteDAO {
         return clientes;
     }
 
+    public Cliente findById(int idCliente){
+
+        Cliente cliente = null;
+        String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()){
+
+            stmt.setInt(1, idCliente);
+
+            if(rs.next()){
+                cliente = new Cliente();
+
+                cliente.setIdCliente(rs.getInt("id_cliente"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setEmail(rs.getString("email"));
+            }
+
+        }catch(SQLException e){
+            throw new RuntimeException("!! Erro ao carregar os clientes !!", e);
+        }
+
+        return cliente;
+    }
+
     /**
      * {@code UPDATE} (UPDATE SET)
      * */
