@@ -10,14 +10,14 @@ public class MenuView {
         this.scan = new Scanner(System.in);
     }
 
-    public int exibir(){
+    public int exibirOpcoes(){
 
         System.out.println("=".repeat(35));
         System.out.println("GERENCIADOR DE TROCA DE LIVROS");
         System.out.println("=".repeat(35));
         System.out.println("1 - GERENCIAR LIVROS");
         System.out.println("2 - GERENCIAR CLIENTES");
-        System.out.println("3 - GERENCIAR TROCAS");
+        System.out.println("3 - GERENCIAR EMPRESTIMOS");
         System.out.println("0 - SAIR");
         System.out.println("=".repeat(35));
         System.out.print("Escolha uma opcao -> ");
