@@ -86,13 +86,13 @@ public class LivroView {
 
         int idLivro = enviarId();
 
-        System.out.print("Nome do livro: ");
+        System.out.print("Novo Nome do livro: ");
         String titulo = scan.nextLine();
 
-        System.out.print("Autor: ");
+        System.out.print("Novo Autor: ");
         String autor = scan.nextLine();
 
-        System.out.print("Ano: ");
+        System.out.print("Novo Ano: ");
         int ano = lerInteiro();
 
         try{
@@ -115,7 +115,7 @@ public class LivroView {
                 System.out.println("Nenhum livro encontrado!");
                 return;
             }
-            sucesso("Livros encontrados !\n");
+            sucesso("Livros encontrados!\n");
             livros.forEach(System.out::println);
         }catch(Exception e) {
             erro(e.getMessage());
@@ -138,7 +138,7 @@ public class LivroView {
                 return;
             }
             sucesso("Livro foi buscado !\n");
-            System.out.println("Livro buscado: " + livroBuscado.toString());
+            System.out.println("Livro buscado: " + livroBuscado);
         }catch(Exception e){
             erro(e.getMessage());
         }
@@ -154,10 +154,10 @@ public class LivroView {
             erro("Nenhum livro encontrado !");
             return;
         }
-        System.out.println("Confirma a remoção do livro '" + livro.getTitulo() + "'? (s/n): ");
+        System.out.print("Confirma a remoção do livro '" + livro.getTitulo() + "'? (s/n): ");
         String confirmacao = scan.nextLine();
 
-        if(confirmacao.equals("s") || confirmacao.equals("S")){
+        if(confirmacao.equalsIgnoreCase("s")){
             livroController.excluirLivro(idLivro);
         }else{
             sucesso("Operação cancelada !");
@@ -165,10 +165,10 @@ public class LivroView {
     }
 
     public void erro(String mensagem){
-        System.out.println("!! ERRO !!" + mensagem);
+        System.out.println("!! ERRO !! " + mensagem);
     }
 
     public void sucesso(String mensagem){
-        System.out.println("!! SUCESSO !!" + mensagem);
+        System.out.println("!! SUCESSO !! " + mensagem);
     }
 }

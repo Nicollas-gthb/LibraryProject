@@ -1,6 +1,8 @@
 package com.system;
 
+import com.system.controller.ClienteController;
 import com.system.controller.LivroController;
+import com.system.view.ClienteView;
 import com.system.view.LivroView;
 import com.system.view.MenuView;
 
@@ -8,8 +10,12 @@ public class Main {
     public static void main(String[] args) {
 
         MenuView menuView = new MenuView();
+
         LivroController livroController = new LivroController();
         LivroView livroView = new LivroView(livroController);
+
+        ClienteController clienteController = new ClienteController();
+        ClienteView clienteView = new ClienteView(clienteController);
 
         int opcao;
 
@@ -18,6 +24,7 @@ public class Main {
 
             switch(opcao){
                 case 1 -> livroView.iniciar();
+                case 2 -> clienteView.iniciar();
                 case 0 -> menuView.encerrar();
                 default -> menuView.erro("Opção inválida !!");
             }
