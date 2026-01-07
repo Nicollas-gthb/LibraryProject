@@ -127,10 +127,10 @@ public class EmprestimoDAO {
         String sql = "SELECT * FROM emprestimo WHERE id_emprestimo = ?";
 
         try(Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()){
+            PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setInt(1, idEmprestimo);
+            ResultSet rs = stmt.executeQuery();
 
             if(rs.next()){
                 emprestimo = new Emprestimo();
@@ -170,7 +170,13 @@ public class EmprestimoDAO {
             stmt.setInt(1, emprestimo.getIdLivro());
             stmt.setInt(2, emprestimo.getIdCliente());
             stmt.setDate(3, Date.valueOf(emprestimo.getDataEmprestimo()));
-            stmt.setDate(4, Date.valueOf(emprestimo.getDataDevolucao()));
+
+            if(emprestimo.getDataDevolucao() != null){
+                stmt.setDate(4, Date.valueOf(emprestimo.getDataDevolucao()));
+            }else{
+                stmt.setNull(4, Types.DATE);
+            }
+
             stmt.setInt(5, idEmprestimo);
 
             stmt.executeUpdate();

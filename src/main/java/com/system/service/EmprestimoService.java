@@ -32,7 +32,12 @@ public class EmprestimoService {
         emprestimoDAO.create(emprestimo);
     }
 
-    public void devolverEmprestimo(int idEmprestimo, int idLivro){
+    public void devolverEmprestimo(int idEmprestimo){
+        Emprestimo emprestimo = emprestimoDAO.findById(idEmprestimo);
+        if(emprestimo == null){
+            throw new RuntimeException("!! Emprestimo não foi encontrado !!");
+        }
+        int idLivro = emprestimo.getIdLivro();
         emprestimoDAO.devolver(idEmprestimo, idLivro, LocalDate.now());
     }
 

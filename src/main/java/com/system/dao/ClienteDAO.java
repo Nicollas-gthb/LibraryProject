@@ -66,10 +66,10 @@ public class ClienteDAO {
         String sql = "SELECT * FROM cliente WHERE id_cliente = ?";
 
         try(Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()){
+            PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setInt(1, idCliente);
+            ResultSet rs = stmt.executeQuery();
 
             if(rs.next()){
                 cliente = new Cliente();

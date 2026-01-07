@@ -69,10 +69,10 @@ public class LivroDAO {
         String sql = "SELECT * FROM livro WHERE id_livro = ?";
 
         try(Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            ResultSet rs = stmt.executeQuery()){
+            PreparedStatement stmt = conn.prepareStatement(sql)){
 
             stmt.setInt(1, idLivro);
+            ResultSet rs = stmt.executeQuery();
 
             if(rs.next()){
                 livro = new Livro();
