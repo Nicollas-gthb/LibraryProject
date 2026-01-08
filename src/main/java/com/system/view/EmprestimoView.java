@@ -4,8 +4,6 @@ import com.system.controller.EmprestimoController;
 import com.system.model.Emprestimo;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,10 +27,9 @@ public class EmprestimoView {
             switch(opcao){
                 case 1 -> realizar();
                 case 2 -> devolver();
-                case 3 -> lerAtualizacao();
-                case 4 -> exibirLista();
-                case 5 -> exibirBuscaId();
-                case 6 -> confirmarRemocao();
+                case 3 -> exibirLista();
+                case 4 -> exibirBuscaId();
+                case 5 -> confirmarRemocao();
                 case 0 -> System.out.println("Voltando..");
                 default -> erro("Opção invalida !!");
             }
@@ -46,10 +43,9 @@ public class EmprestimoView {
         System.out.println("=".repeat(35));
         System.out.println("1 - REALIZAR EMPRESTIMO");
         System.out.println("2 - DEVOLVER EMPRESTIMO");
-        System.out.println("3 - ATUALIZAR EMPRESTIMO");
-        System.out.println("4 - LISTAR EMPRESTIMOS");
-        System.out.println("5 - BUSCAR EMPRESTIMOS POR ID");
-        System.out.println("6 - REMOVER EMPRESTIMO");
+        System.out.println("3 - LISTAR EMPRESTIMOS");
+        System.out.println("4 - BUSCAR EMPRESTIMOS POR ID");
+        System.out.println("5 - REMOVER EMPRESTIMO");
         System.out.println("0 - VOLTAR");
         System.out.println("=".repeat(35));
         System.out.print("Escolha uma opcao -> ");
@@ -93,35 +89,6 @@ public class EmprestimoView {
             emprestimoController.devolverEmprestimo(idEmprestimo);
             sucesso("Emprestimo devolvido com sucesso!");
         }catch(Exception e){
-            erro(e.getMessage());
-        }
-    }
-
-    public void lerAtualizacao(){
-        System.out.println("\n--- ATUALIZAR EMPRESTIMO ---");
-
-        int idEmprestimo = enviarId();
-
-        System.out.print("Novo ID do livro: ");
-        int idLivro = lerInteiro();
-
-        System.out.print("Novo ID do cliente: ");
-        int idCliente = lerInteiro();
-
-        System.out.print("Nova data de emprestimo (dd/MM/yyyy): ");
-        String dataEmprestimo = scan.nextLine();
-
-        try{
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate dataConvertida = LocalDate.parse(dataEmprestimo, formatter);
-
-            try{
-                Emprestimo emprestimo = new Emprestimo(idLivro, idCliente, dataConvertida);
-                emprestimoController.atualizarEmprestimo(idEmprestimo, emprestimo);
-            }catch(Exception e){
-                erro(e.getMessage());
-            }
-        }catch(DateTimeParseException e){
             erro(e.getMessage());
         }
     }
