@@ -119,7 +119,7 @@ public class EmprestimoView {
             Emprestimo emprestimoBuscado = emprestimoController.buscarEmprestimo(idEmprestimo);
 
             if(emprestimoBuscado == null){
-                erro("Emprestimo no encontrado !");
+                erro("Emprestimo não encontrado !");
                 return;
             }
 

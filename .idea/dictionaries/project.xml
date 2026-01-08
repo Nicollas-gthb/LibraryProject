@@ -8,6 +8,7 @@
       <w>buscar</w>
       <w>cancelada</w>
       <w>cliente</w>
+      <w>clientes</w>
       <w>confirma</w>
       <w>confirmacao</w>
       <w>confirmar</w>
@@ -17,12 +18,16 @@
       <w>disponivel</w>
       <w>emprestimo</w>
       <w>emprestimos</w>
+      <w>encerrando</w>
+      <w>encerrar</w>
       <w>encontrado</w>
       <w>encontrados</w>
       <w>enviar</w>
       <w>erro</w>
       <w>escolha</w>
       <w>exibir</w>
+      <w>fechar</w>
+      <w>gerenciador</w>
       <w>gerenciar</w>
       <w>informe</w>
       <w>iniciar</w>
@@ -31,16 +36,20 @@
       <w>lista</w>
       <w>listar</w>
       <w>livro</w>
+      <w>livros</w>
       <w>mensagem</w>
       <w>nenhum</w>
       <w>nickplays</w>
       <w>opcao</w>
       <w>opcoes</w>
       <w>operação</w>
+      <w>programa</w>
       <w>realizar</w>
       <w>remocao</w>
       <w>remoção</w>
+      <w>sair</w>
       <w>sucesso</w>
+      <w>troca</w>
       <w>voltando</w>
       <w>voltar</w>
     </words>

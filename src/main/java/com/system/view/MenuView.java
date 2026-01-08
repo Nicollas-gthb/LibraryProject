@@ -1,13 +1,42 @@
 package com.system.view;
 
+import com.system.controller.ClienteController;
+import com.system.controller.EmprestimoController;
+import com.system.controller.LivroController;
+
 import java.util.Scanner;
 
 public class MenuView {
 
     private final Scanner scan;
 
+    private final LivroController livroController = new LivroController();
+    private final LivroView livroView = new LivroView(livroController);
+
+    private final ClienteController clienteController = new ClienteController();
+    private final ClienteView clienteView = new ClienteView(clienteController);
+
+    private final EmprestimoController emprestimoController = new EmprestimoController();
+    private final EmprestimoView emprestimoView = new EmprestimoView(emprestimoController);
+
     public MenuView(){
         this.scan = new Scanner(System.in);
+    }
+
+    public void iniciarMenu(){
+        int opcao;
+
+        do{
+            opcao = exibirOpcoes();
+
+            switch(opcao){
+                case 1 -> livroView.iniciar();
+                case 2 -> clienteView.iniciar();
+                case 3 -> emprestimoView.iniciar();
+                case 0 -> encerrar();
+                default -> erro("Opção inválida !!");
+            }
+        }while(opcao != 0);
     }
 
     public int exibirOpcoes(){
@@ -29,7 +58,8 @@ public class MenuView {
         try{
             return Integer.parseInt(scan.nextLine());
         }catch(NumberFormatException e){
-            return -1;
+            erro("Opção invalida !!");
+            return lerInteiro();
         }
     }
 
