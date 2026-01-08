@@ -3,6 +3,10 @@ package com.system.service;
 import com.system.dao.ClienteDAO;
 import com.system.dao.EmprestimoDAO;
 import com.system.dao.LivroDAO;
+import com.system.exceptions.ClienteNaoEncontradoException;
+import com.system.exceptions.EmprestimoNaoEncontradoException;
+import com.system.exceptions.LivroIndisponivelException;
+import com.system.exceptions.LivroNaoEncontradoException;
 import com.system.model.Cliente;
 import com.system.model.Emprestimo;
 import com.system.model.Livro;
@@ -26,17 +30,17 @@ public class EmprestimoService {
         Livro livro = livroDAO.findById(emprestimo.getIdLivro());
 
         if(livro == null){
-            throw new RuntimeException("!! Livro não encontrado !!");
+            throw new LivroNaoEncontradoException(emprestimo.getIdLivro());
         }
 
         if(!livro.isDisponivel()){
-            throw new RuntimeException("!! Livro não está disponivel !!");
+            throw new LivroIndisponivelException(emprestimo.getIdLivro());
         }
 
         Cliente cliente = clienteDAO.findById(emprestimo.getIdCliente());
 
         if(cliente == null){
-            throw new RuntimeException("!! Cliente não encontrado !!");
+            throw new ClienteNaoEncontradoException(emprestimo.getIdCliente());
         }
 
         emprestimoDAO.create(emprestimo);
@@ -45,7 +49,7 @@ public class EmprestimoService {
     public void devolver(int idEmprestimo){
         Emprestimo emprestimo = emprestimoDAO.findById(idEmprestimo);
         if(emprestimo == null){
-            throw new RuntimeException("!! Emprestimo não foi encontrado !!");
+            throw new EmprestimoNaoEncontradoException(idEmprestimo);
         }
         int idLivro = emprestimo.getIdLivro();
         emprestimoDAO.devolver(idEmprestimo, idLivro, LocalDate.now());
@@ -60,7 +64,13 @@ public class EmprestimoService {
     }
 
     public Emprestimo buscarId(int idEmprestimo){
-        return emprestimoDAO.findById(idEmprestimo);
+        Emprestimo emprestimo = emprestimoDAO.findById(idEmprestimo);
+
+        if(emprestimo == null){
+            throw new EmprestimoNaoEncontradoException(idEmprestimo);
+        }
+
+        return emprestimo;
     }
 
     public void remover(int idEmprestimo){

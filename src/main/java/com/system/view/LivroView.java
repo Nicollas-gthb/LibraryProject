@@ -1,6 +1,7 @@
 package com.system.view;
 
 import com.system.controller.LivroController;
+import com.system.exceptions.LivroNaoEncontradoException;
 import com.system.model.Livro;
 
 import java.util.List;
@@ -60,16 +61,21 @@ public class LivroView {
         }
     }
 
+    public int enviarId(){
+        System.out.print("\n-- Digite o ID do livro: ");
+        return lerInteiro();
+    }
+
     public void lerCadastro(){
         System.out.println("\n--- CADASTRAR LIVRO ---");
 
         System.out.print("Nome do livro: ");
         String titulo = scan.nextLine();
 
-        System.out.println("Autor: ");
+        System.out.print("Autor: ");
         String autor = scan.nextLine();
 
-        System.out.println("Ano: ");
+        System.out.print("Ano: ");
         int ano = lerInteiro();
 
         try{
@@ -96,6 +102,8 @@ public class LivroView {
         int ano = lerInteiro();
 
         try{
+            Livro livroBuscado = livroController.buscarLivro(idLivro);
+
             Livro livro = new Livro(titulo, autor, ano);
             livro.setIdLivro(idLivro);
             livroController.atualizarLivro(livro);
@@ -122,10 +130,6 @@ public class LivroView {
         }
     }
 
-    public int enviarId(){
-        System.out.print("\n-- Digite o ID do livro: ");
-        return lerInteiro();
-    }
 
     public void exibirBuscaId(){
         System.out.println("\n--- BUSCA POR ID ---\n");
@@ -163,6 +167,7 @@ public class LivroView {
             sucesso("Operação cancelada !");
         }
     }
+
 
     public void erro(String mensagem){
         System.out.println("!! ERRO !! " + mensagem);

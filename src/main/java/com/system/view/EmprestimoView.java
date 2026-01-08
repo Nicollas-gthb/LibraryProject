@@ -1,6 +1,7 @@
 package com.system.view;
 
 import com.system.controller.EmprestimoController;
+import com.system.exceptions.EmprestimoNaoEncontradoException;
 import com.system.model.Emprestimo;
 
 import java.time.LocalDate;
@@ -62,8 +63,13 @@ public class EmprestimoView {
         }
     }
 
+    public int enviarId(){
+        System.out.print("-- Digite o ID do emprestimo: ");
+        return lerInteiro();
+    }
+
     public void realizar(){
-        System.out.println("--- REALIZAR EMPRESTIMO ---");
+        System.out.println("\n--- REALIZAR EMPRESTIMO ---\n");
 
         System.out.print("Informe o ID do livro: ");
         int idLivro = lerInteiro();
@@ -81,7 +87,7 @@ public class EmprestimoView {
     }
 
     public void devolver(){
-        System.out.println("--- DEVOLVER EMPRESTIMO ---");
+        System.out.println("\n--- DEVOLVER EMPRESTIMO ---\n");
 
         int idEmprestimo = enviarId();
 
@@ -138,8 +144,7 @@ public class EmprestimoView {
 
         try{
             if(emprestimo == null){
-                erro("Emprestimo no encontrado !");
-                return;
+                throw new EmprestimoNaoEncontradoException(idEmprestimo);
             }
 
             System.out.print("Confirma a remoção do emprestimo '" + emprestimo.getIdEmprestimo() + "'? (s/n): ");
@@ -156,10 +161,6 @@ public class EmprestimoView {
         }
     }
 
-    public int enviarId(){
-        System.out.print("\n-- Digite o ID do emprestimo: ");
-        return lerInteiro();
-    }
 
     public void erro(String mensagem){
         System.out.println("!! ERRO !! " + mensagem);

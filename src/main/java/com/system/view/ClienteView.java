@@ -1,6 +1,7 @@
 package com.system.view;
 
 import com.system.controller.ClienteController;
+import com.system.exceptions.ClienteNaoEncontradoException;
 import com.system.model.Cliente;
 
 import java.util.List;
@@ -61,20 +62,20 @@ public class ClienteView {
     }
 
     public int enviarId(){
-        System.out.print("\n-- Digite o ID do cliente: ");
+        System.out.print("-- Digite o ID do cliente: ");
         return lerInteiro();
     }
 
     public void lerCadastro(){
-        System.out.println("\n--- CADASTRAR CLIENTE ---");
+        System.out.println("\n--- CADASTRAR CLIENTE ---\n");
 
         System.out.print("Nome: ");
         String nome = scan.nextLine();
 
-        System.out.println("Cpf: ");
+        System.out.print("Cpf: ");
         String cpf = scan.nextLine();
 
-        System.out.println("Email: ");
+        System.out.print("Email: ");
         String email = scan.nextLine();
 
         try{
@@ -87,7 +88,7 @@ public class ClienteView {
     }
 
     public void lerAtualizacao(){
-        System.out.println("\n--- ATUALIZAR CLIENTE ---");
+        System.out.println("\n--- ATUALIZAR CLIENTE ---\n");
 
         int idCliente = enviarId();
 
@@ -135,8 +136,7 @@ public class ClienteView {
         try{
             Cliente clienteBuscado = clienteController.buscarCliente(idCliente);
             if(clienteBuscado == null){
-                erro("Nenhum cliente encontrado !");
-                return;
+                throw new ClienteNaoEncontradoException(idCliente);
             }
 
             sucesso("Cliente buscado com sucesso!");
