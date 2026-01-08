@@ -56,7 +56,7 @@ public class LivroView {
         try{
             return Integer.parseInt(scan.nextLine());
         }catch(NumberFormatException e){
-            return -1;
+            return lerInteiro();
         }
     }
 

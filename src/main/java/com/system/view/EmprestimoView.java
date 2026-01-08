@@ -62,7 +62,7 @@ public class EmprestimoView {
             return Integer.parseInt(scan.nextLine());
         }catch(NumberFormatException e){
             erro(e.getMessage());
-            return -1;
+            return lerInteiro();
         }
     }
 
