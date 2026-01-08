@@ -1,7 +1,9 @@
 package com.system.service;
 
+import com.system.dao.ClienteDAO;
 import com.system.dao.EmprestimoDAO;
 import com.system.dao.LivroDAO;
+import com.system.model.Cliente;
 import com.system.model.Emprestimo;
 import com.system.model.Livro;
 
@@ -12,13 +14,15 @@ public class EmprestimoService {
 
     private final EmprestimoDAO emprestimoDAO;
     private final LivroDAO livroDAO;
+    private final ClienteDAO clienteDAO;
 
     public EmprestimoService(){
         this.emprestimoDAO = new EmprestimoDAO();
         this.livroDAO = new LivroDAO();
+        this.clienteDAO = new ClienteDAO();
     }
 
-    public void realizarEmprestimo(Emprestimo emprestimo){
+    public void realizar(Emprestimo emprestimo){
         Livro livro = livroDAO.findById(emprestimo.getIdLivro());
 
         if(livro == null){
@@ -29,10 +33,16 @@ public class EmprestimoService {
             throw new RuntimeException("!! Livro não está disponivel !!");
         }
 
+        Cliente cliente = clienteDAO.findById(emprestimo.getIdCliente());
+
+        if(cliente == null){
+            throw new RuntimeException("!! Cliente não encontrado !!");
+        }
+
         emprestimoDAO.create(emprestimo);
     }
 
-    public void devolverEmprestimo(int idEmprestimo){
+    public void devolver(int idEmprestimo){
         Emprestimo emprestimo = emprestimoDAO.findById(idEmprestimo);
         if(emprestimo == null){
             throw new RuntimeException("!! Emprestimo não foi encontrado !!");

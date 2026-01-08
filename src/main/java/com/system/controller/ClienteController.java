@@ -30,6 +30,6 @@ public class ClienteController {
     }
 
     public void removerCliente(int idCliente){
-
+        clienteService.remover(idCliente);
     }
 }

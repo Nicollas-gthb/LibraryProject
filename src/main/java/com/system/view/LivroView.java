@@ -29,7 +29,7 @@ public class LivroView {
                 case 3 -> exibirLista();
                 case 4 -> exibirBuscaId();
                 case 5 -> confirmarRemocao();
-                case 0 -> System.out.println("Voltando");
+                case 0 -> System.out.println("Voltando..");
                 default -> erro("opção invalida !!");
             }
         }while(opcao != 0);

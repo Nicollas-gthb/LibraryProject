@@ -29,7 +29,7 @@ public class ClienteView {
                 case 3 -> exibirLista();
                 case 4 -> exibirBuscaId();
                 case 5 -> confirmarRemocao();
-                case 0 -> System.out.println("Voltando");
+                case 0 -> System.out.println("Voltando..");
                 default -> erro("opção invalida !!");
             }
         }while(opcao != 0);
@@ -61,7 +61,7 @@ public class ClienteView {
     }
 
     public int enviarId(){
-        System.out.print("\n-- Digite o ID do livro: ");
+        System.out.print("\n-- Digite o ID do cliente: ");
         return lerInteiro();
     }
 
